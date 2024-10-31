@@ -14,13 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'user@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('12345678'),
-        ]);
+        $this->call(
+            UserSeeder::class,
+            // SettingsSeeder::class,
+        );
     }
 }
