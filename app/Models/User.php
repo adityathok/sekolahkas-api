@@ -13,6 +13,10 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+
+    // Non-incrementing ID karena UUID
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -54,7 +58,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($model) {
-            $model->id = (string) time() . '_' . Str::random(5);
+            $model->id = Str::uuid();
         });
     }
 }
