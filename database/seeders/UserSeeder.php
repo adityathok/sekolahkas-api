@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        //default admin users
         User::create([
             'name' => 'admin',
             'email' => 'admin@example.com',
@@ -25,5 +25,7 @@ class UserSeeder extends Seeder
             'role' => 'superadmin',
             'remember_token' => Str::random(10),
         ]);
+        // Generate 100 users
+        // User::factory()->count(100)->create();
     }
 }
