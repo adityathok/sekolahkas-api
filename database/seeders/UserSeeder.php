@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'role' => 'superadmin',
             'remember_token' => Str::random(10),
         ]);
-        // Generate 100 users
-        // User::factory()->count(100)->create();
+        // Generate 50 users
+        // User::factory()->count(50)->create();
     }
 }

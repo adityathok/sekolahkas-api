@@ -59,6 +59,10 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
+        $name = $user->name;
         $user->delete();
+        return response()->json([
+            'message' => 'User ' . $name . ' berhasil dihapus'
+        ]);
     }
 }
