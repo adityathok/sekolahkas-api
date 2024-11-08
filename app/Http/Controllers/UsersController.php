@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -45,12 +46,20 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name'      => 'required|min:5',
+            'email'     => 'required|min:10',
+            // 'avatar'    => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar'     => 'required|min:10',
+        ]);
+
+        //update
         $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
+        $user->update([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'avatar'    => $request->avatar
+        ]);
     }
 
     /**
