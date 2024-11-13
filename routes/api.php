@@ -11,6 +11,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
+    Route::post('users/password/{id}', [UsersController::class, 'update_password']);
+
     Route::apiResources([
         'users' => UsersController::class,
         // 'posts' => PostController::class,
