@@ -25,12 +25,22 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate
+        $request->validate([
+            'name'      => 'required|min:3',
+            'email'     => 'required|email|unique:users,email',
+            'role'      => 'required|min:3',
+            'password'  => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role;
         $user->password = $request->password;
         $user->save();
+
+        return response()->json($user);
     }
 
     /**
