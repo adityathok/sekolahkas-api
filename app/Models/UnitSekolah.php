@@ -11,6 +11,7 @@ class UnitSekolah extends Model
     public $incrementing = false;
 
     protected $fillable = [
+        'id',
         'nama',
         'jenjang',
         'alamat',
@@ -37,7 +38,10 @@ class UnitSekolah extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->id = Str::ulid();
+            // Menetapkan ID menggunakan ULID jika ID kosong
+            if (empty($model->id)) {
+                $model->id = Str::ulid();
+            }
         });
     }
 }

@@ -15,6 +15,7 @@ class UnitSekolahSeeder extends Seeder
     {
         $data = [
             [
+                'id' => 'KB123456789',
                 'nama' => 'KB Matahari Pagi',
                 'jenjang' => 'KB',
                 'alamat' => 'Jl. Pendidikan No.1, Sukoharjo',
@@ -31,6 +32,7 @@ class UnitSekolahSeeder extends Seeder
                 'email' => 'kbmataharipagi@example.com',
             ],
             [
+                'id' => 'TK123456789',
                 'nama' => 'TK Matahari Pagi',
                 'jenjang' => 'TK',
                 'alamat' => 'Jl. Pendidikan No.2, Sukoharjo',
@@ -47,6 +49,7 @@ class UnitSekolahSeeder extends Seeder
                 'email' => 'tkmataharipagi@example.com',
             ],
             [
+                'id' => 'SD123456789',
                 'nama' => 'SD Matahari Pagi',
                 'jenjang' => 'SD',
                 'alamat' => 'Jl. Pendidikan No.3, Sukoharjo',
@@ -63,6 +66,7 @@ class UnitSekolahSeeder extends Seeder
                 'email' => 'sdmataharipagi@example.com',
             ],
             [
+                'id' => 'SMP123456789',
                 'nama' => 'SMP Matahari Pagi',
                 'jenjang' => 'SMP',
                 'alamat' => 'Jl. Pendidikan No.15, Sukoharjo',
@@ -79,6 +83,7 @@ class UnitSekolahSeeder extends Seeder
                 'email' => 'smpmataharipagi@example.com',
             ],
             [
+                'id' => 'SMA123456789',
                 'nama' => 'SMA Matahari Pagi',
                 'jenjang' => 'SMA',
                 'alamat' => 'Jl. Pendidikan No.30, Sukoharjo',
