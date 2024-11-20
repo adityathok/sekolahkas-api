@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UnitSekolah;
+use App\Http\Requests\UnitSekolahRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UnitSekolahController extends Controller
 {
@@ -69,20 +72,10 @@ class UnitSekolahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UnitSekolahRequest $request, string $id)
     {
-        $request->validate([
-            'nama' => 'nullable|string|max:255',
-            'jenjang' => 'nullable|in:TK,KB,SD,SMP',
-            'alamat' => 'nullable|string',
-            'telepon' => 'nullable|string',
-            'email' => 'nullable|email',
-            'kode_pos' => 'nullable|string',
-            'status' => 'nullable|in:aktif,non-aktif',
-            'tanggal_dibentuk' => 'nullable|date',
-            'kepala_sekolah' => 'nullable|string',
-            'jumlah_siswa' => 'nullable|integer',
-        ]);
+        // Validasi
+        $validated = $request->validated();
 
         $unitSekolah = UnitSekolah::find($id);
 
@@ -90,18 +83,21 @@ class UnitSekolahController extends Controller
             return response()->json(['message' => 'Unit sekolah tidak ditemukan'], 404);
         }
 
-        $unitSekolah->update($request->only([
-            'nama',
-            'jenjang',
-            'alamat',
-            'telepon',
-            'email',
-            'kode_pos',
-            'status',
-            'tanggal_dibentuk',
-            'kepala_sekolah',
-            'jumlah_siswa'
-        ]));
+        // Cek jika ada file gambar yang diunggah
+        if ($request->hasFile('logo')) {
+
+            // hapus gambar sebelumnya
+            $oldimg = $unitSekolah->logo;
+            if ($oldimg && Storage::disk('public')->exists($oldimg)) {
+                Storage::disk('public')->delete($oldimg);
+            }
+
+            // Simpan file baru
+            $path = $request->file('logo')->store('unitsekolah', 'public');
+            $validated['logo'] = $path; // Tambahkan path ke data yang akan diupdate
+        }
+
+        $unitSekolah->update($validated);
 
         return response()->json($unitSekolah);
     }
